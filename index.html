@@ -26,12 +26,14 @@
     "@type": "PostalAddress",
     "addressLocality": "Vrellë",
     "addressRegion": "Istog",
-    "addressCountry": "XK"
+    "addressCountry": "XK",
+    "postalCode": "31000"
    },
    "sameAs": [
     "https://www.instagram.com/shkendasevent",
     "https://www.facebook.com/profile.php?id=100093682899725",
-    "https://www.threads.com/@shkendasevent"
+    "https://www.threads.com/@shkendasevent",
+    "https://maps.google.com/?cid=15422472730559161226"
    ],
    "makesOffer": [
     {
@@ -82,6 +84,29 @@
       "@type": "Service",
       "name": "Dekor për veturën e nuses"
      }
+    }
+   ],
+   "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 42.768811,
+    "longitude": 20.405355
+   },
+   "hasMap": "https://maps.google.com/?cid=15422472730559161226",
+   "url": "https://shkendasevent.vercel.app/",
+   "image": "https://shkendasevent.vercel.app/img/dasma-01.jpg",
+   "openingHoursSpecification": [
+    {
+     "@type": "OpeningHoursSpecification",
+     "dayOfWeek": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday"
+     ],
+     "opens": "08:00",
+     "closes": "17:00"
     }
    ]
   },
@@ -907,11 +932,13 @@ footer .wordmark{color:var(--cream);font-size:18px}
       <div class="c-actions">
         <a class="btn btn-gold" href="https://wa.me/38348661635" target="_blank" rel="noopener">WhatsApp</a>
         <a class="btn btn-ghost" href="viber://chat?number=%2B38348661635">Viber</a>
+        <a class="btn btn-ghost" href="https://maps.google.com/?cid=15422472730559161226" target="_blank" rel="noopener">Google Maps</a>
         <button class="btn btn-ghost" id="copyPhone" type="button">Kopjo numrin</button>
       </div>
     </div>
     <div class="facts">
-      <div class="fact"><span>Adresa</span><span>Vrellë, Istog, Kosovë</span></div>
+      <div class="fact"><span>Adresa</span><a href="https://maps.google.com/?cid=15422472730559161226" target="_blank" rel="noopener">Vrellë, Istog 31000 ↗</a></div>
+      <div class="fact"><span>Orari</span><span>E hënë – e shtunë · 08:00 – 17:00</span></div>
       <div class="fact"><span>WhatsApp · Viber</span><span class="mono">+383 48 661 635</span></div>
       <div class="fact"><span>Instagram</span><a href="https://www.instagram.com/shkendasevent" target="_blank" rel="noopener">@shkendasevent</a></div>
       <div class="fact"><span>Facebook</span><a href="https://www.facebook.com/profile.php?id=100093682899725" target="_blank" rel="noopener">ShkendasEvent</a></div>
@@ -1104,7 +1131,7 @@ $('#copyPhone').addEventListener('click',()=>{ copy('+38348661635','Numri u kopj
 const BOT=(function(){
   const norm=t=>t.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9\s]/g,' ');
   const A={wa:{label:'Shkruaj në WhatsApp',href:WA},viber:{label:'Shkruaj në Viber',href:VIBER},ig:{label:'Instagram',href:IG},fb:{label:'Facebook',href:FB},th:{label:'Threads',href:TH},
-    maps:{label:'Hap në Google Maps',href:'https://www.google.com/maps/search/?api=1&query=Vrell%C3%AB%2C%20Istog%2C%20Kosov%C3%AB'},
+    maps:{label:'Hap në Google Maps',href:'https://maps.google.com/?cid=15422472730559161226'},
     plan:{label:'Krijo dekorin tënd',act:'krijo'},gal:{label:'Shiko galerinë',act:'galeria'},book:{label:'Shfleto katalogun',act:'libri'},svc:{label:'Shiko shërbimet',act:'sherbimet'}};
   const occ=id=>({label:'Kërko ofertë',act:'occ:'+id});
   const I=[
