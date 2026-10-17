@@ -218,7 +218,20 @@ header.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;backgroun
 .nav-links a{text-decoration:none;font-size:14px;font-weight:500;color:var(--muted)}
 .nav-links a:hover{color:var(--rose-deep)}
 .nav-cta{padding:11px 16px;font-size:14px}
-@media (max-width:900px){.nav-links{display:none}.nav-cta{margin-left:auto}}
+.menu-btn{display:none;place-items:center;width:44px;height:44px;flex:none;border-radius:50%;border:1px solid rgba(59,24,48,.18);background:var(--white);color:var(--plum);cursor:pointer;font-size:18px}
+.menu-btn svg{width:22px;height:22px}
+.mnav{position:fixed;inset:0;z-index:55;background:radial-gradient(90% 60% at 80% 0%,#FBE0E8,var(--cream) 60%);display:flex;flex-direction:column;padding:calc(env(safe-area-inset-top,0px) + 12px) var(--gutter-r) calc(env(safe-area-inset-bottom,0px) + 24px) var(--gutter-l);overflow-y:auto}
+.mnav[hidden]{display:none!important}
+.mnav-top{display:flex;justify-content:space-between;align-items:center;height:56px}
+.mnav-top .menu-btn{display:grid}
+.mnav-list{list-style:none;margin:24px 0 0;padding:0;display:grid}
+.mnav-list a{display:flex;align-items:baseline;gap:16px;padding:16px 0;border-bottom:1px solid var(--line);text-decoration:none;font-family:var(--f-display);font-size:clamp(28px,8vw,40px);line-height:1.05}
+.mnav-list a span{font-family:var(--f-mono);font-size:12px;color:var(--rose);letter-spacing:.1em}
+.mnav-list a:active,.mnav-list a:hover{color:var(--rose-deep)}
+.mnav-foot{margin-top:auto;padding-top:28px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.mnav-foot .mono{width:100%;font-size:13px;color:var(--muted)}
+@media (max-width:900px){.nav-links{display:none}.nav-cta{margin-left:auto}.menu-btn{display:grid}}
+@media (max-width:420px){.nav-cta .mono{display:none}.nav-cta{padding:12px}}
 
 /* ---------- Hero ---------- */
 .hero{padding-block:clamp(30px,5vw,70px) clamp(40px,6vw,80px);background:radial-gradient(70% 60% at 85% 20%, rgba(246,201,214,.55), transparent 70%)}
@@ -299,6 +312,9 @@ header.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;backgroun
 .pg-art svg{width:64%;height:auto;max-height:88%}
 .pg-art .ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .pg-txt{padding:18px 24px 44px;display:grid;gap:8px;align-content:start}
+.pg-duo{flex:1;min-height:0;display:grid;grid-template-rows:1fr 1fr;gap:6px;padding:10px 10px 0}
+.pg-duo img{width:100%;height:100%;min-height:0;object-fit:cover;border-radius:6px;display:block}
+.pg-cap{padding:10px 24px 40px;display:grid;gap:4px}
 .pg-text{padding:34px 28px 46px;display:flex;flex-direction:column;gap:12px;background:linear-gradient(180deg,#FFFAF7,#FCE9EF)}
 .pg-eb{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--rose)}
 .pg h3{font-family:var(--f-display);font-size:clamp(18px,2.3vw,27px);line-height:1.08}
@@ -377,6 +393,8 @@ header.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;backgroun
 .gf:hover{border-color:var(--rose)}
 .gf[aria-pressed="true"]{background:var(--rose);color:var(--white);border-color:var(--rose)}
 .masonry{columns:4 240px;column-gap:14px}
+@media (max-width:640px){.masonry{columns:2;column-gap:8px}.masonry figure{margin-bottom:8px;border-radius:12px}.masonry figcaption{font-size:11.5px;padding:28px 9px 8px}}
+section[id]{scroll-margin-top:calc(env(safe-area-inset-top,0px) + 76px)}
 .masonry figure{break-inside:avoid;margin:0 0 14px;position:relative;border-radius:18px;overflow:hidden;background:var(--petal)}
 .masonry figure[hidden]{display:none!important}
 .gimg{display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in}
@@ -568,14 +586,38 @@ footer .wordmark{color:var(--cream);font-size:18px}
       <a href="#libri">Katalogu</a>
       <a href="#krijo">Krijo dekorin</a>
       <a href="#galeria">Galeria</a>
+      <a href="#pyetje">Pyetje</a>
       <a href="#kontakti">Kontakti</a>
     </nav>
     <a class="btn btn-rose nav-cta" href="https://wa.me/38348661635" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 20l1.3-4A8 8 0 1 1 8 18.7z"/><path d="M9 9.5c.5 2.5 2.5 4.5 5 5l1.2-1.2 2 1-.4 1.5c-4 .5-8.8-4.3-8.3-8.3l1.5-.4 1 2z"/></svg>
       <span class="mono">048 661 635</span>
     </a>
+    <button class="menu-btn" id="menuBtn" type="button" aria-controls="mnav" aria-expanded="false" aria-label="Hap menunë">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+    </button>
   </div>
 </header>
+<nav class="mnav" id="mnav" hidden aria-label="Menuja">
+  <div class="mnav-top">
+    <span class="wordmark">Shkendas<i>Event</i></span>
+    <button class="menu-btn on" id="menuClose" type="button" aria-label="Mbyll menunë">✕</button>
+  </div>
+  <ol class="mnav-list">
+    <li><a href="#sherbimet"><span>01</span>Shërbimet</a></li>
+    <li><a href="#libri"><span>02</span>Katalogu</a></li>
+    <li><a href="#krijo"><span>03</span>Krijo dekorin</a></li>
+    <li><a href="#galeria"><span>04</span>Galeria</a></li>
+    <li><a href="#rrjetet"><span>05</span>Rrjetet sociale</a></li>
+    <li><a href="#pyetje"><span>06</span>Pyetje të shpeshta</a></li>
+    <li><a href="#kontakti"><span>07</span>Kontakti</a></li>
+  </ol>
+  <div class="mnav-foot">
+    <a class="btn btn-rose" href="https://wa.me/38348661635" target="_blank" rel="noopener">WhatsApp</a>
+    <a class="btn btn-ghost" href="viber://chat?number=%2B38348661635">Viber</a>
+    <span class="mono">+383 48 661 635 · Vrellë, Istog</span>
+  </div>
+</nav>
 
 <main id="top">
 <!-- ============ HERO ============ -->
@@ -640,7 +682,7 @@ footer .wordmark{color:var(--cream);font-size:18px}
     <div class="book-stage"><div class="book" id="book"></div></div>
     <div class="book-ctrl">
       <button type="button" class="bk-btn" id="bkPrev" aria-label="Faqja e mëparshme">‹</button>
-      <span class="mono" id="bkNum">1 / 12</span>
+      <span class="mono" id="bkNum">1 / 16</span>
       <button type="button" class="bk-btn" id="bkNext" aria-label="Faqja tjetër">›</button>
     </div>
   </div>
@@ -709,74 +751,108 @@ footer .wordmark{color:var(--cream);font-size:18px}
         <h2>Festat që i kemi <em>veshur</em> me lule.</h2>
       </div>
       <div class="gfilters" role="group" aria-label="Filtro galerinë">
-        <button type="button" class="gf" data-g="all" aria-pressed="true">Të gjitha<span class="n">56</span></button>
-        <button type="button" class="gf" data-g="dasma" aria-pressed="false">Dasma<span class="n">24</span></button>
-        <button type="button" class="gf" data-g="fejesa" aria-pressed="false">Fejesa<span class="n">6</span></button>
-        <button type="button" class="gf" data-g="kuq" aria-pressed="false">Dekor i kuq & kanagjegj<span class="n">8</span></button>
-        <button type="button" class="gf" data-g="femije" aria-pressed="false">Ditëlindje & fëmijë<span class="n">9</span></button>
-        <button type="button" class="gf" data-g="vetura" aria-pressed="false">Vetura e nuses<span class="n">7</span></button>
-        <button type="button" class="gf" data-g="lule" aria-pressed="false">Lule & dhurata<span class="n">2</span></button>
+        <button type="button" class="gf" data-g="all" aria-pressed="true">Të gjitha<span class="n">90</span></button>
+        <button type="button" class="gf" data-g="dasma" aria-pressed="false">Dasma<span class="n">47</span></button>
+        <button type="button" class="gf" data-g="fejesa" aria-pressed="false">Fejesa<span class="n">7</span></button>
+        <button type="button" class="gf" data-g="kuq" aria-pressed="false">Dekor i kuq & kanagjegj<span class="n">12</span></button>
+        <button type="button" class="gf" data-g="femije" aria-pressed="false">Ditëlindje & fëmijë<span class="n">11</span></button>
+        <button type="button" class="gf" data-g="vetura" aria-pressed="false">Vetura e nuses<span class="n">10</span></button>
+        <button type="button" class="gf" data-g="lule" aria-pressed="false">Lule & dhurata<span class="n">3</span></button>
       </div>
     </div>
     <div class="masonry" id="masonry">
       <figure data-g="dasma"><button type="button" class="gimg" aria-label="Zmadho: Nusja dhe dhëndri nën harkun me lule të bardha"><img src="img/dasma-00.jpg" width="826" height="1100" alt="Nusja dhe dhëndri nën harkun me lule të bardha" loading="lazy"></button><figcaption>Nusja dhe dhëndri nën harkun me lule të bardha</figcaption></figure>
       <figure data-g="dasma"><button type="button" class="gimg" aria-label="Zmadho: Hark me lule dhe neoni &quot;Një jetë me ty&quot;"><img src="img/dasma-01.jpg" width="826" height="1100" alt="Hark me lule dhe neoni &quot;Një jetë me ty&quot;" loading="lazy"></button><figcaption>Hark me lule dhe neoni "Një jetë me ty"</figcaption></figure>
+      <figure data-g="kuq"><button type="button" class="gimg" aria-label="Zmadho: Kanagjegji i Anitës"><img src="img/kuq-30.jpg" width="826" height="1100" alt="Kanagjegji i Anitës" loading="lazy"></button><figcaption>Kanagjegji i Anitës</figcaption></figure>
+      <figure data-g="femije"><button type="button" class="gimg" aria-label="Zmadho: Ditëlindja e parë e Elsës"><img src="img/femije-38.jpg" width="880" height="1100" alt="Ditëlindja e parë e Elsës" loading="lazy"></button><figcaption>Ditëlindja e parë e Elsës</figcaption></figure>
+      <figure data-g="vetura"><button type="button" class="gimg" aria-label="Zmadho: Rolls-Royce me lule të bardha"><img src="img/vetura-47.jpg" width="1100" height="619" alt="Rolls-Royce me lule të bardha" loading="lazy"></button><figcaption>Rolls-Royce me lule të bardha</figcaption></figure>
+      <figure data-g="fejesa"><button type="button" class="gimg" aria-label="Zmadho: Kartë mirëseardhjeje për fejesë"><img src="img/fejesa-24.jpg" width="826" height="1100" alt="Kartë mirëseardhjeje për fejesë" loading="lazy"></button><figcaption>Kartë mirëseardhjeje për fejesë</figcaption></figure>
+      <figure data-g="lule"><button type="button" class="gimg" aria-label="Zmadho: &quot;Will you marry me&quot; me trëndafila"><img src="img/lule-54.jpg" width="880" height="1100" alt="&quot;Will you marry me&quot; me trëndafila" loading="lazy"></button><figcaption>"Will you marry me" me trëndafila</figcaption></figure>
       <figure data-g="dasma"><button type="button" class="gimg" aria-label="Zmadho: Harqe me lule për ceremoninë në oborr"><img src="img/dasma-02.jpg" width="825" height="1100" alt="Harqe me lule për ceremoninë në oborr" loading="lazy"></button><figcaption>Harqe me lule për ceremoninë në oborr</figcaption></figure>
       <figure data-g="dasma"><button type="button" class="gimg" aria-label="Zmadho: Ceremoni në natyrë me lule të bardha"><img src="img/dasma-03.jpg" width="826" height="1100" alt="Ceremoni në natyrë me lule të bardha" loading="lazy"></button><figcaption>Ceremoni në natyrë me lule të bardha</figcaption></figure>
+      <figure data-g="kuq"><button type="button" class="gimg" aria-label="Zmadho: Hark i rrumbullakët me trëndafila të kuq"><img src="img/kuq-31.jpg" width="563" height="751" alt="Hark i rrumbullakët me trëndafila të kuq" loading="lazy"></button><figcaption>Hark i rrumbullakët me trëndafila të kuq</figcaption></figure>
+      <figure data-g="femije"><button type="button" class="gimg" aria-label="Zmadho: Ditëlindja e parë e Aleas"><img src="img/femije-39.jpg" width="825" height="1100" alt="Ditëlindja e parë e Aleas" loading="lazy"></button><figcaption>Ditëlindja e parë e Aleas</figcaption></figure>
+      <figure data-g="vetura"><button type="button" class="gimg" aria-label="Zmadho: Veturë e nuses me lule dhe fjongo"><img src="img/vetura-48.jpg" width="880" height="1100" alt="Veturë e nuses me lule dhe fjongo" loading="lazy"></button><figcaption>Veturë e nuses me lule dhe fjongo</figcaption></figure>
+      <figure data-g="fejesa"><button type="button" class="gimg" aria-label="Zmadho: Tabelë me emrat e çiftit"><img src="img/fejesa-25.jpg" width="826" height="1100" alt="Tabelë me emrat e çiftit" loading="lazy"></button><figcaption>Tabelë me emrat e çiftit</figcaption></figure>
+      <figure data-g="lule"><button type="button" class="gimg" aria-label="Zmadho: Kuti me trëndafila dhe çokollata"><img src="img/lule-55.jpg" width="825" height="1100" alt="Kuti me trëndafila dhe çokollata" loading="lazy"></button><figcaption>Kuti me trëndafila dhe çokollata</figcaption></figure>
       <figure data-g="dasma"><button type="button" class="gimg" aria-label="Zmadho: Hark me lule dhe perde me drita"><img src="img/dasma-04.jpg" width="880" height="1100" alt="Hark me lule dhe perde me drita" loading="lazy"></button><figcaption>Hark me lule dhe perde me drita</figcaption></figure>
       <figure data-g="dasma"><button type="button" class="gimg" aria-label="Zmadho: Sallë dasme me hark lulesh"><img src="img/dasma-05.jpg" width="825" height="1100" alt="Sallë dasme me hark lulesh" loading="lazy"></button><figcaption>Sallë dasme me hark lulesh</figcaption></figure>
+      <figure data-g="kuq"><button type="button" class="gimg" aria-label="Zmadho: Hark me trëndafila të kuq dhe perde"><img src="img/kuq-32.jpg" width="619" height="1100" alt="Hark me trëndafila të kuq dhe perde" loading="lazy"></button><figcaption>Hark me trëndafila të kuq dhe perde</figcaption></figure>
+      <figure data-g="femije"><button type="button" class="gimg" aria-label="Zmadho: &quot;Girls just wanna be one&quot;"><img src="img/femije-40.jpg" width="826" height="1100" alt="&quot;Girls just wanna be one&quot;" loading="lazy"></button><figcaption>"Girls just wanna be one"</figcaption></figure>
+      <figure data-g="vetura"><button type="button" class="gimg" aria-label="Zmadho: G-Class me lule të bardha"><img src="img/vetura-49.jpg" width="825" height="1100" alt="G-Class me lule të bardha" loading="lazy"></button><figcaption>G-Class me lule të bardha</figcaption></figure>
+      <figure data-g="fejesa"><button type="button" class="gimg" aria-label="Zmadho: Tabelë mirëseardhjeje me lule"><img src="img/fejesa-26.jpg" width="826" height="1100" alt="Tabelë mirëseardhjeje me lule" loading="lazy"></button><figcaption>Tabelë mirëseardhjeje me lule</figcaption></figure>
+      <figure data-g="lule"><button type="button" class="gimg" aria-label="Zmadho: Kënd me lule për 8 Mars"><img src="img/lule-89.jpg" width="825" height="1100" alt="Kënd me lule për 8 Mars" loading="lazy"></button><figcaption>Kënd me lule për 8 Mars</figcaption></figure>
       <figure data-g="dasma"><button type="button" class="gimg" aria-label="Zmadho: Tavolina të rrumbullakëta me qendra lulesh"><img src="img/dasma-06.jpg" width="825" height="1100" alt="Tavolina të rrumbullakëta me qendra lulesh" loading="lazy"></button><figcaption>Tavolina të rrumbullakëta me qendra lulesh</figcaption></figure>
       <figure data-g="dasma"><button type="button" class="gimg" aria-label="Zmadho: Hark me lule dhe drita yjesh"><img src="img/dasma-07.jpg" width="826" height="1100" alt="Hark me lule dhe drita yjesh" loading="lazy"></button><figcaption>Hark me lule dhe drita yjesh</figcaption></figure>
+      <figure data-g="kuq"><button type="button" class="gimg" aria-label="Zmadho: Kënd me trëndafila të kuq dhe qirinj"><img src="img/kuq-33.jpg" width="672" height="1100" alt="Kënd me trëndafila të kuq dhe qirinj" loading="lazy"></button><figcaption>Kënd me trëndafila të kuq dhe qirinj</figcaption></figure>
+      <figure data-g="femije"><button type="button" class="gimg" aria-label="Zmadho: Ditëlindja e parë me balona blu e ari"><img src="img/femije-41.jpg" width="825" height="1100" alt="Ditëlindja e parë me balona blu e ari" loading="lazy"></button><figcaption>Ditëlindja e parë me balona blu e ari</figcaption></figure>
+      <figure data-g="vetura"><button type="button" class="gimg" aria-label="Zmadho: Veturë e nuses para sallës"><img src="img/vetura-50.jpg" width="880" height="1100" alt="Veturë e nuses para sallës" loading="lazy"></button><figcaption>Veturë e nuses para sallës</figcaption></figure>
+      <figure data-g="fejesa"><button type="button" class="gimg" aria-label="Zmadho: Tabelë në kavalet me lule"><img src="img/fejesa-27.jpg" width="826" height="1100" alt="Tabelë në kavalet me lule" loading="lazy"></button><figcaption>Tabelë në kavalet me lule</figcaption></figure>
       <figure data-g="dasma"><button type="button" class="gimg" aria-label="Zmadho: Qendër tavoline me lule të bardha"><img src="img/dasma-08.jpg" width="826" height="1100" alt="Qendër tavoline me lule të bardha" loading="lazy"></button><figcaption>Qendër tavoline me lule të bardha</figcaption></figure>
       <figure data-g="dasma"><button type="button" class="gimg" aria-label="Zmadho: Tavolinë e gjatë me lule rozë"><img src="img/dasma-09.jpg" width="880" height="1100" alt="Tavolinë e gjatë me lule rozë" loading="lazy"></button><figcaption>Tavolinë e gjatë me lule rozë</figcaption></figure>
+      <figure data-g="kuq"><button type="button" class="gimg" aria-label="Zmadho: Tavolina e çiftit me lule të kuqe"><img src="img/kuq-34.jpg" width="825" height="1100" alt="Tavolina e çiftit me lule të kuqe" loading="lazy"></button><figcaption>Tavolina e çiftit me lule të kuqe</figcaption></figure>
+      <figure data-g="femije"><button type="button" class="gimg" aria-label="Zmadho: Balona blu dhe arush për ditëlindje"><img src="img/femije-42.jpg" width="825" height="1100" alt="Balona blu dhe arush për ditëlindje" loading="lazy"></button><figcaption>Balona blu dhe arush për ditëlindje</figcaption></figure>
+      <figure data-g="vetura"><button type="button" class="gimg" aria-label="Zmadho: Veturë me zemër trëndafilash"><img src="img/vetura-51.jpg" width="825" height="1100" alt="Veturë me zemër trëndafilash" loading="lazy"></button><figcaption>Veturë me zemër trëndafilash</figcaption></figure>
+      <figure data-g="fejesa"><button type="button" class="gimg" aria-label="Zmadho: Kavalet me lule të bardha"><img src="img/fejesa-28.jpg" width="826" height="1100" alt="Kavalet me lule të bardha" loading="lazy"></button><figcaption>Kavalet me lule të bardha</figcaption></figure>
       <figure data-g="dasma"><button type="button" class="gimg" aria-label="Zmadho: Tavolinë e zezë me harqe lulesh"><img src="img/dasma-10.jpg" width="825" height="1100" alt="Tavolinë e zezë me harqe lulesh" loading="lazy"></button><figcaption>Tavolinë e zezë me harqe lulesh</figcaption></figure>
       <figure data-g="dasma"><button type="button" class="gimg" aria-label="Zmadho: Tavolina e çiftit me lule të bardha"><img src="img/dasma-11.jpg" width="826" height="1100" alt="Tavolina e çiftit me lule të bardha" loading="lazy"></button><figcaption>Tavolina e çiftit me lule të bardha</figcaption></figure>
+      <figure data-g="kuq"><button type="button" class="gimg" aria-label="Zmadho: Tavolinë me trëndafila të kuq"><img src="img/kuq-35.jpg" width="826" height="1100" alt="Tavolinë me trëndafila të kuq" loading="lazy"></button><figcaption>Tavolinë me trëndafila të kuq</figcaption></figure>
+      <figure data-g="femije"><button type="button" class="gimg" aria-label="Zmadho: Ditëlindje 40 vjeç me balona ari"><img src="img/femije-43.jpg" width="826" height="1100" alt="Ditëlindje 40 vjeç me balona ari" loading="lazy"></button><figcaption>Ditëlindje 40 vjeç me balona ari</figcaption></figure>
+      <figure data-g="vetura"><button type="button" class="gimg" aria-label="Zmadho: Lule dhe fjongo e bardhë"><img src="img/vetura-52.jpg" width="826" height="1100" alt="Lule dhe fjongo e bardhë" loading="lazy"></button><figcaption>Lule dhe fjongo e bardhë</figcaption></figure>
+      <figure data-g="fejesa"><button type="button" class="gimg" aria-label="Zmadho: Ftesë dhe lule në ngjyrë krem"><img src="img/fejesa-29.jpg" width="883" height="1100" alt="Ftesë dhe lule në ngjyrë krem" loading="lazy"></button><figcaption>Ftesë dhe lule në ngjyrë krem</figcaption></figure>
       <figure data-g="dasma"><button type="button" class="gimg" aria-label="Zmadho: Tavolina e çiftit me karrige ari"><img src="img/dasma-12.jpg" width="826" height="1100" alt="Tavolina e çiftit me karrige ari" loading="lazy"></button><figcaption>Tavolina e çiftit me karrige ari</figcaption></figure>
       <figure data-g="dasma"><button type="button" class="gimg" aria-label="Zmadho: Skenë me inicialet e çiftit"><img src="img/dasma-13.jpg" width="848" height="1100" alt="Skenë me inicialet e çiftit" loading="lazy"></button><figcaption>Skenë me inicialet e çiftit</figcaption></figure>
+      <figure data-g="kuq"><button type="button" class="gimg" aria-label="Zmadho: Hyrje me lule të kuqe"><img src="img/kuq-36.jpg" width="563" height="751" alt="Hyrje me lule të kuqe" loading="lazy"></button><figcaption>Hyrje me lule të kuqe</figcaption></figure>
+      <figure data-g="femije"><button type="button" class="gimg" aria-label="Zmadho: Boy or Girl, festa e zbulimit"><img src="img/femije-44.jpg" width="880" height="1100" alt="Boy or Girl, festa e zbulimit" loading="lazy"></button><figcaption>Boy or Girl, festa e zbulimit</figcaption></figure>
+      <figure data-g="vetura"><button type="button" class="gimg" aria-label="Zmadho: Dy vetura të dekoruara për dasmë"><img src="img/vetura-53.jpg" width="880" height="1100" alt="Dy vetura të dekoruara për dasmë" loading="lazy"></button><figcaption>Dy vetura të dekoruara për dasmë</figcaption></figure>
+      <figure data-g="fejesa"><button type="button" class="gimg" aria-label="Zmadho: Tabelë me emrat e çiftit dhe lule"><img src="img/fejesa-79.jpg" width="826" height="1100" alt="Tabelë me emrat e çiftit dhe lule" loading="lazy"></button><figcaption>Tabelë me emrat e çiftit dhe lule</figcaption></figure>
       <figure data-g="dasma"><button type="button" class="gimg" aria-label="Zmadho: Tavolinë në kopsht me qirinj"><img src="img/dasma-14.jpg" width="734" height="1100" alt="Tavolinë në kopsht me qirinj" loading="lazy"></button><figcaption>Tavolinë në kopsht me qirinj</figcaption></figure>
       <figure data-g="dasma"><button type="button" class="gimg" aria-label="Zmadho: Tavolinë dasme nën pemë"><img src="img/dasma-15.jpg" width="826" height="1100" alt="Tavolinë dasme nën pemë" loading="lazy"></button><figcaption>Tavolinë dasme nën pemë</figcaption></figure>
+      <figure data-g="kuq"><button type="button" class="gimg" aria-label="Zmadho: Tavolina me lule të kuqe"><img src="img/kuq-37.jpg" width="508" height="1100" alt="Tavolina me lule të kuqe" loading="lazy"></button><figcaption>Tavolina me lule të kuqe</figcaption></figure>
+      <figure data-g="femije"><button type="button" class="gimg" aria-label="Zmadho: Synetia e Enesit"><img src="img/femije-45.jpg" width="826" height="1100" alt="Synetia e Enesit" loading="lazy"></button><figcaption>Synetia e Enesit</figcaption></figure>
+      <figure data-g="vetura"><button type="button" class="gimg" aria-label="Zmadho: Lule të bardha mbi kapakun e veturës"><img src="img/vetura-86.jpg" width="825" height="1100" alt="Lule të bardha mbi kapakun e veturës" loading="lazy"></button><figcaption>Lule të bardha mbi kapakun e veturës</figcaption></figure>
       <figure data-g="dasma"><button type="button" class="gimg" aria-label="Zmadho: Karrige Chiavari dhe harqe për ceremoninë"><img src="img/dasma-16.jpg" width="825" height="1100" alt="Karrige Chiavari dhe harqe për ceremoninë" loading="lazy"></button><figcaption>Karrige Chiavari dhe harqe për ceremoninë</figcaption></figure>
       <figure data-g="dasma"><button type="button" class="gimg" aria-label="Zmadho: Sfond me lule rozë dhe emrat e çiftit"><img src="img/dasma-17.jpg" width="826" height="1100" alt="Sfond me lule rozë dhe emrat e çiftit" loading="lazy"></button><figcaption>Sfond me lule rozë dhe emrat e çiftit</figcaption></figure>
+      <figure data-g="kuq"><button type="button" class="gimg" aria-label="Zmadho: Sallë në të kuq e të zezë"><img src="img/kuq-80.jpg" width="826" height="1100" alt="Sallë në të kuq e të zezë" loading="lazy"></button><figcaption>Sallë në të kuq e të zezë</figcaption></figure>
+      <figure data-g="femije"><button type="button" class="gimg" aria-label="Zmadho: Tavolina për festën Boy or Girl"><img src="img/femije-46.jpg" width="880" height="1100" alt="Tavolina për festën Boy or Girl" loading="lazy"></button><figcaption>Tavolina për festën Boy or Girl</figcaption></figure>
+      <figure data-g="vetura"><button type="button" class="gimg" aria-label="Zmadho: Veturë me lule të kuqe e të bardha"><img src="img/vetura-87.jpg" width="825" height="1100" alt="Veturë me lule të kuqe e të bardha" loading="lazy"></button><figcaption>Veturë me lule të kuqe e të bardha</figcaption></figure>
       <figure data-g="dasma"><button type="button" class="gimg" aria-label="Zmadho: Hyrje me kolona lulesh rozë"><img src="img/dasma-18.jpg" width="826" height="1100" alt="Hyrje me kolona lulesh rozë" loading="lazy"></button><figcaption>Hyrje me kolona lulesh rozë</figcaption></figure>
       <figure data-g="dasma"><button type="button" class="gimg" aria-label="Zmadho: Rrugica e kishës me lule të bardha"><img src="img/dasma-19.jpg" width="826" height="1100" alt="Rrugica e kishës me lule të bardha" loading="lazy"></button><figcaption>Rrugica e kishës me lule të bardha</figcaption></figure>
+      <figure data-g="kuq"><button type="button" class="gimg" aria-label="Zmadho: Tabelë me inicialet dhe trëndafila"><img src="img/kuq-81.jpg" width="826" height="1100" alt="Tabelë me inicialet dhe trëndafila" loading="lazy"></button><figcaption>Tabelë me inicialet dhe trëndafila</figcaption></figure>
+      <figure data-g="femije"><button type="button" class="gimg" aria-label="Zmadho: Balona rozë e krem për ditëlindje"><img src="img/femije-84.jpg" width="826" height="1100" alt="Balona rozë e krem për ditëlindje" loading="lazy"></button><figcaption>Balona rozë e krem për ditëlindje</figcaption></figure>
+      <figure data-g="vetura"><button type="button" class="gimg" aria-label="Zmadho: Rolls-Royce i bardhë me lule"><img src="img/vetura-88.jpg" width="619" height="1100" alt="Rolls-Royce i bardhë me lule" loading="lazy"></button><figcaption>Rolls-Royce i bardhë me lule</figcaption></figure>
       <figure data-g="dasma"><button type="button" class="gimg" aria-label="Zmadho: Rrugica e ndriçuar me qirinj"><img src="img/dasma-20.jpg" width="826" height="1100" alt="Rrugica e ndriçuar me qirinj" loading="lazy"></button><figcaption>Rrugica e ndriçuar me qirinj</figcaption></figure>
       <figure data-g="dasma"><button type="button" class="gimg" aria-label="Zmadho: Sallë me qendra të larta lulesh"><img src="img/dasma-21.jpg" width="826" height="1100" alt="Sallë me qendra të larta lulesh" loading="lazy"></button><figcaption>Sallë me qendra të larta lulesh</figcaption></figure>
+      <figure data-g="kuq"><button type="button" class="gimg" aria-label="Zmadho: Tabelë uljesh me trëndafila të kuq"><img src="img/kuq-82.jpg" width="826" height="1100" alt="Tabelë uljesh me trëndafila të kuq" loading="lazy"></button><figcaption>Tabelë uljesh me trëndafila të kuq</figcaption></figure>
+      <figure data-g="femije"><button type="button" class="gimg" aria-label="Zmadho: Tavolinat për synetin e Enesit"><img src="img/femije-85.jpg" width="826" height="1100" alt="Tavolinat për synetin e Enesit" loading="lazy"></button><figcaption>Tavolinat për synetin e Enesit</figcaption></figure>
       <figure data-g="dasma"><button type="button" class="gimg" aria-label="Zmadho: Tavolinë e gjatë me qendra të bardha"><img src="img/dasma-22.jpg" width="826" height="1100" alt="Tavolinë e gjatë me qendra të bardha" loading="lazy"></button><figcaption>Tavolinë e gjatë me qendra të bardha</figcaption></figure>
       <figure data-g="dasma"><button type="button" class="gimg" aria-label="Zmadho: Dekor në të gjelbër e të bardhë"><img src="img/dasma-23.jpg" width="826" height="1100" alt="Dekor në të gjelbër e të bardhë" loading="lazy"></button><figcaption>Dekor në të gjelbër e të bardhë</figcaption></figure>
-      <figure data-g="fejesa"><button type="button" class="gimg" aria-label="Zmadho: Kartë mirëseardhjeje për fejesë"><img src="img/fejesa-24.jpg" width="826" height="1100" alt="Kartë mirëseardhjeje për fejesë" loading="lazy"></button><figcaption>Kartë mirëseardhjeje për fejesë</figcaption></figure>
-      <figure data-g="fejesa"><button type="button" class="gimg" aria-label="Zmadho: Tabelë me emrat e çiftit"><img src="img/fejesa-25.jpg" width="826" height="1100" alt="Tabelë me emrat e çiftit" loading="lazy"></button><figcaption>Tabelë me emrat e çiftit</figcaption></figure>
-      <figure data-g="fejesa"><button type="button" class="gimg" aria-label="Zmadho: Tabelë mirëseardhjeje me lule"><img src="img/fejesa-26.jpg" width="826" height="1100" alt="Tabelë mirëseardhjeje me lule" loading="lazy"></button><figcaption>Tabelë mirëseardhjeje me lule</figcaption></figure>
-      <figure data-g="fejesa"><button type="button" class="gimg" aria-label="Zmadho: Tabelë në kavalet me lule"><img src="img/fejesa-27.jpg" width="826" height="1100" alt="Tabelë në kavalet me lule" loading="lazy"></button><figcaption>Tabelë në kavalet me lule</figcaption></figure>
-      <figure data-g="fejesa"><button type="button" class="gimg" aria-label="Zmadho: Kavalet me lule të bardha"><img src="img/fejesa-28.jpg" width="826" height="1100" alt="Kavalet me lule të bardha" loading="lazy"></button><figcaption>Kavalet me lule të bardha</figcaption></figure>
-      <figure data-g="fejesa"><button type="button" class="gimg" aria-label="Zmadho: Ftesë dhe lule në ngjyrë krem"><img src="img/fejesa-29.jpg" width="883" height="1100" alt="Ftesë dhe lule në ngjyrë krem" loading="lazy"></button><figcaption>Ftesë dhe lule në ngjyrë krem</figcaption></figure>
-      <figure data-g="kuq"><button type="button" class="gimg" aria-label="Zmadho: Kanagjegji i Anitës"><img src="img/kuq-30.jpg" width="826" height="1100" alt="Kanagjegji i Anitës" loading="lazy"></button><figcaption>Kanagjegji i Anitës</figcaption></figure>
-      <figure data-g="kuq"><button type="button" class="gimg" aria-label="Zmadho: Hark i rrumbullakët me trëndafila të kuq"><img src="img/kuq-31.jpg" width="563" height="751" alt="Hark i rrumbullakët me trëndafila të kuq" loading="lazy"></button><figcaption>Hark i rrumbullakët me trëndafila të kuq</figcaption></figure>
-      <figure data-g="kuq"><button type="button" class="gimg" aria-label="Zmadho: Hark me trëndafila të kuq dhe perde"><img src="img/kuq-32.jpg" width="619" height="1100" alt="Hark me trëndafila të kuq dhe perde" loading="lazy"></button><figcaption>Hark me trëndafila të kuq dhe perde</figcaption></figure>
-      <figure data-g="kuq"><button type="button" class="gimg" aria-label="Zmadho: Kënd me trëndafila të kuq dhe qirinj"><img src="img/kuq-33.jpg" width="672" height="1100" alt="Kënd me trëndafila të kuq dhe qirinj" loading="lazy"></button><figcaption>Kënd me trëndafila të kuq dhe qirinj</figcaption></figure>
-      <figure data-g="kuq"><button type="button" class="gimg" aria-label="Zmadho: Tavolina e çiftit me lule të kuqe"><img src="img/kuq-34.jpg" width="825" height="1100" alt="Tavolina e çiftit me lule të kuqe" loading="lazy"></button><figcaption>Tavolina e çiftit me lule të kuqe</figcaption></figure>
-      <figure data-g="kuq"><button type="button" class="gimg" aria-label="Zmadho: Tavolinë me trëndafila të kuq"><img src="img/kuq-35.jpg" width="826" height="1100" alt="Tavolinë me trëndafila të kuq" loading="lazy"></button><figcaption>Tavolinë me trëndafila të kuq</figcaption></figure>
-      <figure data-g="kuq"><button type="button" class="gimg" aria-label="Zmadho: Hyrje me lule të kuqe"><img src="img/kuq-36.jpg" width="563" height="751" alt="Hyrje me lule të kuqe" loading="lazy"></button><figcaption>Hyrje me lule të kuqe</figcaption></figure>
-      <figure data-g="kuq"><button type="button" class="gimg" aria-label="Zmadho: Tavolina me lule të kuqe"><img src="img/kuq-37.jpg" width="508" height="1100" alt="Tavolina me lule të kuqe" loading="lazy"></button><figcaption>Tavolina me lule të kuqe</figcaption></figure>
-      <figure data-g="femije"><button type="button" class="gimg" aria-label="Zmadho: Ditëlindja e parë e Elsës"><img src="img/femije-38.jpg" width="880" height="1100" alt="Ditëlindja e parë e Elsës" loading="lazy"></button><figcaption>Ditëlindja e parë e Elsës</figcaption></figure>
-      <figure data-g="femije"><button type="button" class="gimg" aria-label="Zmadho: Ditëlindja e parë e Aleas"><img src="img/femije-39.jpg" width="825" height="1100" alt="Ditëlindja e parë e Aleas" loading="lazy"></button><figcaption>Ditëlindja e parë e Aleas</figcaption></figure>
-      <figure data-g="femije"><button type="button" class="gimg" aria-label="Zmadho: &quot;Girls just wanna be one&quot;"><img src="img/femije-40.jpg" width="826" height="1100" alt="&quot;Girls just wanna be one&quot;" loading="lazy"></button><figcaption>"Girls just wanna be one"</figcaption></figure>
-      <figure data-g="femije"><button type="button" class="gimg" aria-label="Zmadho: Ditëlindja e parë me balona blu e ari"><img src="img/femije-41.jpg" width="825" height="1100" alt="Ditëlindja e parë me balona blu e ari" loading="lazy"></button><figcaption>Ditëlindja e parë me balona blu e ari</figcaption></figure>
-      <figure data-g="femije"><button type="button" class="gimg" aria-label="Zmadho: Balona blu dhe arush për ditëlindje"><img src="img/femije-42.jpg" width="825" height="1100" alt="Balona blu dhe arush për ditëlindje" loading="lazy"></button><figcaption>Balona blu dhe arush për ditëlindje</figcaption></figure>
-      <figure data-g="femije"><button type="button" class="gimg" aria-label="Zmadho: Ditëlindje 40 vjeç me balona ari"><img src="img/femije-43.jpg" width="826" height="1100" alt="Ditëlindje 40 vjeç me balona ari" loading="lazy"></button><figcaption>Ditëlindje 40 vjeç me balona ari</figcaption></figure>
-      <figure data-g="femije"><button type="button" class="gimg" aria-label="Zmadho: Boy or Girl, festa e zbulimit"><img src="img/femije-44.jpg" width="880" height="1100" alt="Boy or Girl, festa e zbulimit" loading="lazy"></button><figcaption>Boy or Girl, festa e zbulimit</figcaption></figure>
-      <figure data-g="femije"><button type="button" class="gimg" aria-label="Zmadho: Synetia e Enesit"><img src="img/femije-45.jpg" width="826" height="1100" alt="Synetia e Enesit" loading="lazy"></button><figcaption>Synetia e Enesit</figcaption></figure>
-      <figure data-g="femije"><button type="button" class="gimg" aria-label="Zmadho: Tavolina për festën Boy or Girl"><img src="img/femije-46.jpg" width="880" height="1100" alt="Tavolina për festën Boy or Girl" loading="lazy"></button><figcaption>Tavolina për festën Boy or Girl</figcaption></figure>
-      <figure data-g="vetura"><button type="button" class="gimg" aria-label="Zmadho: Rolls-Royce me lule të bardha"><img src="img/vetura-47.jpg" width="1100" height="619" alt="Rolls-Royce me lule të bardha" loading="lazy"></button><figcaption>Rolls-Royce me lule të bardha</figcaption></figure>
-      <figure data-g="vetura"><button type="button" class="gimg" aria-label="Zmadho: Veturë e nuses me lule dhe fjongo"><img src="img/vetura-48.jpg" width="880" height="1100" alt="Veturë e nuses me lule dhe fjongo" loading="lazy"></button><figcaption>Veturë e nuses me lule dhe fjongo</figcaption></figure>
-      <figure data-g="vetura"><button type="button" class="gimg" aria-label="Zmadho: G-Class me lule të bardha"><img src="img/vetura-49.jpg" width="825" height="1100" alt="G-Class me lule të bardha" loading="lazy"></button><figcaption>G-Class me lule të bardha</figcaption></figure>
-      <figure data-g="vetura"><button type="button" class="gimg" aria-label="Zmadho: Veturë e nuses para sallës"><img src="img/vetura-50.jpg" width="880" height="1100" alt="Veturë e nuses para sallës" loading="lazy"></button><figcaption>Veturë e nuses para sallës</figcaption></figure>
-      <figure data-g="vetura"><button type="button" class="gimg" aria-label="Zmadho: Veturë me zemër trëndafilash"><img src="img/vetura-51.jpg" width="825" height="1100" alt="Veturë me zemër trëndafilash" loading="lazy"></button><figcaption>Veturë me zemër trëndafilash</figcaption></figure>
-      <figure data-g="vetura"><button type="button" class="gimg" aria-label="Zmadho: Lule dhe fjongo e bardhë"><img src="img/vetura-52.jpg" width="826" height="1100" alt="Lule dhe fjongo e bardhë" loading="lazy"></button><figcaption>Lule dhe fjongo e bardhë</figcaption></figure>
-      <figure data-g="vetura"><button type="button" class="gimg" aria-label="Zmadho: Dy vetura të dekoruara për dasmë"><img src="img/vetura-53.jpg" width="880" height="1100" alt="Dy vetura të dekoruara për dasmë" loading="lazy"></button><figcaption>Dy vetura të dekoruara për dasmë</figcaption></figure>
-      <figure data-g="lule"><button type="button" class="gimg" aria-label="Zmadho: &quot;Will you marry me&quot; me trëndafila"><img src="img/lule-54.jpg" width="880" height="1100" alt="&quot;Will you marry me&quot; me trëndafila" loading="lazy"></button><figcaption>"Will you marry me" me trëndafila</figcaption></figure>
-      <figure data-g="lule"><button type="button" class="gimg" aria-label="Zmadho: Kuti me trëndafila dhe çokollata"><img src="img/lule-55.jpg" width="825" height="1100" alt="Kuti me trëndafila dhe çokollata" loading="lazy"></button><figcaption>Kuti me trëndafila dhe çokollata</figcaption></figure>
+      <figure data-g="kuq"><button type="button" class="gimg" aria-label="Zmadho: Tavolina e çiftit me trëndafila të kuq"><img src="img/kuq-83.jpg" width="826" height="1100" alt="Tavolina e çiftit me trëndafila të kuq" loading="lazy"></button><figcaption>Tavolina e çiftit me trëndafila të kuq</figcaption></figure>
+      <figure data-g="dasma"><button type="button" class="gimg" aria-label="Zmadho: Tavolinë e gjatë me lule dhe gota kristali"><img src="img/dasma-56.jpg" width="880" height="1100" alt="Tavolinë e gjatë me lule dhe gota kristali" loading="lazy"></button><figcaption>Tavolinë e gjatë me lule dhe gota kristali</figcaption></figure>
+      <figure data-g="dasma"><button type="button" class="gimg" aria-label="Zmadho: Tavolinë e rrumbullakët me pjata ari"><img src="img/dasma-57.jpg" width="880" height="1100" alt="Tavolinë e rrumbullakët me pjata ari" loading="lazy"></button><figcaption>Tavolinë e rrumbullakët me pjata ari</figcaption></figure>
+      <figure data-g="dasma"><button type="button" class="gimg" aria-label="Zmadho: Tavolinë dasme me drita dhe lule rozë"><img src="img/dasma-58.jpg" width="825" height="1100" alt="Tavolinë dasme me drita dhe lule rozë" loading="lazy"></button><figcaption>Tavolinë dasme me drita dhe lule rozë</figcaption></figure>
+      <figure data-g="dasma"><button type="button" class="gimg" aria-label="Zmadho: Tavolinë e gjatë me qendra lulesh"><img src="img/dasma-59.jpg" width="826" height="1100" alt="Tavolinë e gjatë me qendra lulesh" loading="lazy"></button><figcaption>Tavolinë e gjatë me qendra lulesh</figcaption></figure>
+      <figure data-g="dasma"><button type="button" class="gimg" aria-label="Zmadho: Tavolina pranë dritareve me lule të bardha"><img src="img/dasma-60.jpg" width="826" height="1100" alt="Tavolina pranë dritareve me lule të bardha" loading="lazy"></button><figcaption>Tavolina pranë dritareve me lule të bardha</figcaption></figure>
+      <figure data-g="dasma"><button type="button" class="gimg" aria-label="Zmadho: Tavolina me qirinj dhe neon"><img src="img/dasma-61.jpg" width="826" height="1100" alt="Tavolina me qirinj dhe neon" loading="lazy"></button><figcaption>Tavolina me qirinj dhe neon</figcaption></figure>
+      <figure data-g="dasma"><button type="button" class="gimg" aria-label="Zmadho: Sallë dasme e bardhë"><img src="img/dasma-62.jpg" width="825" height="1100" alt="Sallë dasme e bardhë" loading="lazy"></button><figcaption>Sallë dasme e bardhë</figcaption></figure>
+      <figure data-g="dasma"><button type="button" class="gimg" aria-label="Zmadho: Hark me lule mbi tavolinën e çiftit"><img src="img/dasma-63.jpg" width="826" height="1100" alt="Hark me lule mbi tavolinën e çiftit" loading="lazy"></button><figcaption>Hark me lule mbi tavolinën e çiftit</figcaption></figure>
+      <figure data-g="dasma"><button type="button" class="gimg" aria-label="Zmadho: Hyrje me hark lulesh dhe tabelë"><img src="img/dasma-64.jpg" width="826" height="1100" alt="Hyrje me hark lulesh dhe tabelë" loading="lazy"></button><figcaption>Hyrje me hark lulesh dhe tabelë</figcaption></figure>
+      <figure data-g="dasma"><button type="button" class="gimg" aria-label="Zmadho: Tavolinë e gjatë me gjelbërim"><img src="img/dasma-65.jpg" width="826" height="1100" alt="Tavolinë e gjatë me gjelbërim" loading="lazy"></button><figcaption>Tavolinë e gjatë me gjelbërim</figcaption></figure>
+      <figure data-g="dasma"><button type="button" class="gimg" aria-label="Zmadho: Tabelë mirëseardhjeje me lule në oborr"><img src="img/dasma-66.jpg" width="826" height="1100" alt="Tabelë mirëseardhjeje me lule në oborr" loading="lazy"></button><figcaption>Tabelë mirëseardhjeje me lule në oborr</figcaption></figure>
+      <figure data-g="dasma"><button type="button" class="gimg" aria-label="Zmadho: Ceremoni me harqe në lëndinë"><img src="img/dasma-67.jpg" width="1100" height="825" alt="Ceremoni me harqe në lëndinë" loading="lazy"></button><figcaption>Ceremoni me harqe në lëndinë</figcaption></figure>
+      <figure data-g="dasma"><button type="button" class="gimg" aria-label="Zmadho: Rrugicë e bardhë për hyrjen e çiftit"><img src="img/dasma-68.jpg" width="826" height="1100" alt="Rrugicë e bardhë për hyrjen e çiftit" loading="lazy"></button><figcaption>Rrugicë e bardhë për hyrjen e çiftit</figcaption></figure>
+      <figure data-g="dasma"><button type="button" class="gimg" aria-label="Zmadho: Tavolina me qendra ari"><img src="img/dasma-69.jpg" width="826" height="1100" alt="Tavolina me qendra ari" loading="lazy"></button><figcaption>Tavolina me qendra ari</figcaption></figure>
+      <figure data-g="dasma"><button type="button" class="gimg" aria-label="Zmadho: Tavolinë e gjatë me lule të bardha"><img src="img/dasma-70.jpg" width="825" height="1100" alt="Tavolinë e gjatë me lule të bardha" loading="lazy"></button><figcaption>Tavolinë e gjatë me lule të bardha</figcaption></figure>
+      <figure data-g="dasma"><button type="button" class="gimg" aria-label="Zmadho: Tavolinë në kopsht me tabelë"><img src="img/dasma-71.jpg" width="826" height="1100" alt="Tavolinë në kopsht me tabelë" loading="lazy"></button><figcaption>Tavolinë në kopsht me tabelë</figcaption></figure>
+      <figure data-g="dasma"><button type="button" class="gimg" aria-label="Zmadho: Sallë me tavolina të gjata"><img src="img/dasma-72.jpg" width="826" height="1100" alt="Sallë me tavolina të gjata" loading="lazy"></button><figcaption>Sallë me tavolina të gjata</figcaption></figure>
+      <figure data-g="dasma"><button type="button" class="gimg" aria-label="Zmadho: Sallë me perde të bardha"><img src="img/dasma-73.jpg" width="826" height="1100" alt="Sallë me perde të bardha" loading="lazy"></button><figcaption>Sallë me perde të bardha</figcaption></figure>
+      <figure data-g="dasma"><button type="button" class="gimg" aria-label="Zmadho: Kartë mirëseardhjeje mbi pjatë"><img src="img/dasma-74.jpg" width="825" height="1100" alt="Kartë mirëseardhjeje mbi pjatë" loading="lazy"></button><figcaption>Kartë mirëseardhjeje mbi pjatë</figcaption></figure>
+      <figure data-g="dasma"><button type="button" class="gimg" aria-label="Zmadho: Tavolinë me hark lulesh"><img src="img/dasma-75.jpg" width="826" height="1100" alt="Tavolinë me hark lulesh" loading="lazy"></button><figcaption>Tavolinë me hark lulesh</figcaption></figure>
+      <figure data-g="dasma"><button type="button" class="gimg" aria-label="Zmadho: Tavolinë e gjatë në kopsht"><img src="img/dasma-76.jpg" width="826" height="1100" alt="Tavolinë e gjatë në kopsht" loading="lazy"></button><figcaption>Tavolinë e gjatë në kopsht</figcaption></figure>
+      <figure data-g="dasma"><button type="button" class="gimg" aria-label="Zmadho: Hyrje me tapet të kuq dhe fenerë"><img src="img/dasma-77.jpg" width="826" height="1100" alt="Hyrje me tapet të kuq dhe fenerë" loading="lazy"></button><figcaption>Hyrje me tapet të kuq dhe fenerë</figcaption></figure>
+      <figure data-g="dasma"><button type="button" class="gimg" aria-label="Zmadho: Kolonë me lule rozë"><img src="img/dasma-78.jpg" width="825" height="1100" alt="Kolonë me lule rozë" loading="lazy"></button><figcaption>Kolonë me lule rozë</figcaption></figure>
     </div>
-    <div class="more"><button type="button" class="btn btn-ghost" id="moreBtn">Shiko më shumë foto</button></div>
+    <div class="more"><button type="button" class="btn btn-ghost" id="moreBtn">Shiko të gjitha 90 fotot</button></div>
   </div>
 </section>
 
@@ -941,8 +1017,10 @@ $('#faqList').innerHTML=FAQ.map(([q,a])=>`<details><summary>${q}</summary><p>${a
   h+=`<div class="pg pg-cover" data-density="hard"><div class="pg-in"><svg class="ring ill" viewBox="0 0 200 150"><use href="#i-dasma"/></svg><span class="cov-small">Katalogu</span><div class="cov-mark">Shkendas<i>Event</i></div><div class="cov-script">çdo festë, me dashuri</div><span class="cov-small">Vrellë · Istog</span></div></div>`;
   h+=pg(2,`<div class="pg-text" style="flex:1"><span class="pg-eb">Mirësevini</span><h3>Festat tuaja, të veshura me lule e dritë</h3><p>ShkendasEvent bën dekor për dasma, fejesa, kanagjegj, bride to be dhe ditëlindje, si dhe kuti xhami për fejesë e dekor për veturën e nuses.</p><p>Çdo dekor e krijojmë me kujdes, në ngjyrat dhe stilin që i doni ju.</p><ul class="pg-list"><li><b>WhatsApp · Viber</b><span>+383 48 661 635</span></li><li><b>Adresa</b><span>Vrellë, Istog</span></li><li><b>Instagram</b><span>@shkendasevent</span></li></ul></div>`);
   SERVICES.forEach((s,i)=>{ h+=pg(3+i,`<div class="pg-art" style="background:${s.tint}">${art(s)}</div><div class="pg-txt"><span class="pg-eb">${String(i+1).padStart(2,'0')} · Shërbimet</span><h3>${s.name}</h3><p>${s.d}</p></div>`); });
-  h+=pg(10,`<div class="pg-text" style="flex:1"><span class="pg-eb">Ngjyrat</span><h3>Zgjidhni paletën tuaj</h3><p>Disa nga kombinimet më të dashura. Ose na tregoni tuajën.</p><div class="swatch-row">${PALETTES.map(p=>`<div><span class="dots">${p.c.map(c=>`<i style="background:${c};width:16px;height:16px"></i>`).join('')}</span>${p.name}</div>`).join('')}</div></div>`);
-  h+=pg(11,`<div class="pg-text" style="flex:1"><span class="pg-eb">Si punojmë</span><h3>Katër hapa deri te festa</h3><ul class="pg-list"><li><b>1. Na shkruani</b><span>rasti, data, vendi</span></li><li><b>2. Ideja</b><span>ngjyrat dhe stili</span></li><li><b>3. Dekorimi</b><span>para festës</span></li><li><b>4. Festa</b><span>ju festoni</span></li></ul><p style="margin-top:8px">Rezervoni herët për datat e verës.</p></div>`);
+  const DUO=[['Dasma','Harqe me lule, tavolina dhe ceremoni','img/dasma-00.jpg','img/dasma-02.jpg'],['Dekor i kuq','Trëndafila të kuq për kanagjegj e dasma','img/kuq-31.jpg','img/kuq-33.jpg'],['Festa për fëmijë','Ditëlindje, synet dhe Boy or Girl','img/femije-40.jpg','img/femije-44.jpg'],['Vetura e nuses','Lule dhe fjongo në ngjyrat e dasmës','img/vetura-48.jpg','img/vetura-49.jpg']];
+  DUO.forEach((d,i)=>{ h+=pg(10+i,`<div class="pg-duo"><img src="${d[2]}" alt="${d[0]}" loading="lazy"><img src="${d[3]}" alt="${d[0]}" loading="lazy"></div><div class="pg-cap"><span class="pg-eb">Galeria</span><h3>${d[0]}</h3><p>${d[1]}</p></div>`); });
+  h+=pg(14,`<div class="pg-text" style="flex:1"><span class="pg-eb">Ngjyrat</span><h3>Zgjidhni paletën tuaj</h3><p>Disa nga kombinimet më të dashura. Ose na tregoni tuajën.</p><div class="swatch-row">${PALETTES.map(p=>`<div><span class="dots">${p.c.map(c=>`<i style="background:${c};width:16px;height:16px"></i>`).join('')}</span>${p.name}</div>`).join('')}</div></div>`);
+  h+=pg(15,`<div class="pg-text" style="flex:1"><span class="pg-eb">Si punojmë</span><h3>Katër hapa deri te festa</h3><ul class="pg-list"><li><b>1. Na shkruani</b><span>rasti, data, vendi</span></li><li><b>2. Ideja</b><span>ngjyrat dhe stili</span></li><li><b>3. Dekorimi</b><span>para festës</span></li><li><b>4. Festa</b><span>ju festoni</span></li></ul><p style="margin-top:8px">Rezervoni herët për datat e verës.</p></div>`);
   h+=`<div class="pg pg-cover pg-back" data-density="hard"><div class="pg-in"><span class="cov-small">Rezervoni datën</span><div class="cov-mark">Shkendas<i>Event</i></div><div class="cov-phone mono">+383 48 661 635</div><span class="cov-small">WhatsApp · Viber</span><div class="cov-script">ju presim me dashuri</div><span class="cov-small">Vrellë, Istog · @shkendasevent</span></div></div>`;
   const el=$('#book'); el.innerHTML=h;
   const total=el.querySelectorAll('.pg').length, num=$('#bkNum');
@@ -1080,10 +1158,20 @@ const BOT=(function(){
 })();
 
 
+/* ================= MOBILE MENU ================= */
+(function(){
+  const nav=$('#mnav'), btn=$('#menuBtn');
+  const open=()=>{ nav.hidden=false; btn.setAttribute('aria-expanded','true'); document.documentElement.style.overflow='hidden'; };
+  const close=()=>{ nav.hidden=true; btn.setAttribute('aria-expanded','false'); document.documentElement.style.overflow=''; };
+  btn.addEventListener('click',open); $('#menuClose').addEventListener('click',close);
+  nav.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',close));
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&!nav.hidden) close(); });
+})();
+
 /* ================= GALLERY ================= */
 (function(){
   const figs=[...document.querySelectorAll('#masonry figure')], more=$('#moreBtn');
-  let filter='all', expanded=false; const LIMIT=16;
+  let filter='all', expanded=false; const LIMIT=24;
   function render(){
     let shown=0;
     figs.forEach(f=>{ const ok=filter==='all'||f.dataset.g===filter; const vis=ok&&(expanded||filter!=='all'||shown<LIMIT); f.hidden=!vis; if(ok) shown++; });
